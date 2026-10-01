@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eggdog 3D</title>
+    <title>ibcel</title>
 
     <style>
         * {
@@ -15,15 +15,62 @@
             margin: 0;
             overflow: hidden;
             background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
         canvas {
             display: block;
         }
+
+        /* Nombre detrás del modelo */
+        .name {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(100px, 18vw, 280px);
+            font-weight: 900;
+            letter-spacing: -10px;
+            color: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Proyectos */
+        .projects {
+            position: fixed;
+            top: 50%;
+            right: 7%;
+            transform: translateY(-50%);
+            width: 260px;
+            height: 400px;
+            z-index: 3;
+        }
+
+        .projects h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Canvas encima del nombre */
+        canvas {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="name">ibcel</div>
+
+    <div class="projects">
+        <h2>PROJETOS</h2>
+    </div>
 
 <script type="importmap">
 {
@@ -40,11 +87,9 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 
-// Escena
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x111111);
 
-// Cámara
 const camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
@@ -54,7 +99,6 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(0, 1, 4);
 
-// Renderizador
 const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
@@ -72,58 +116,42 @@ const light = new THREE.DirectionalLight(0xffffff, 3);
 light.position.set(3, 5, 4);
 scene.add(light);
 
-// Cargar materiales
+// Material
 const mtlLoader = new MTLLoader();
 
-mtlLoader.load(
-    'Eggdog.mtl',
+mtlLoader.load('Eggdog.mtl', function(materials) {
 
-    function (materials) {
+    materials.preload();
 
-        materials.preload();
+    const objLoader = new OBJLoader();
+    objLoader.setMaterials(materials);
 
-        // Cargar modelo
-        const objLoader = new OBJLoader();
-        objLoader.setMaterials(materials);
+    objLoader.load('Eggdog.obj', function(eggdog) {
 
-        objLoader.load(
-            'Eggdog.obj',
+        // Centrar modelo
+        const box = new THREE.Box3().setFromObject(eggdog);
+        const center = box.getCenter(new THREE.Vector3());
 
-            function (eggdog) {
+        eggdog.position.sub(center);
 
-                // Centrar modelo
-                const box = new THREE.Box3().setFromObject(eggdog);
-                const center = box.getCenter(new THREE.Vector3());
+        // Ajustar tamaño
+        const size = box.getSize(new THREE.Vector3());
+        const maxSize = Math.max(size.x, size.y, size.z);
 
-                eggdog.position.sub(center);
+        const scale = 2 / maxSize;
+        eggdog.scale.setScalar(scale);
 
-                // Ajustar tamaño automáticamente
-                const size = box.getSize(new THREE.Vector3());
-                const maxSize = Math.max(size.x, size.y, size.z);
+        scene.add(eggdog);
 
-                const scale = 2 / maxSize;
-                eggdog.scale.setScalar(scale);
+        window.eggdog = eggdog;
 
-                scene.add(eggdog);
+    }, undefined, function(error) {
+        console.error('Error cargando Eggdog.obj:', error);
+    });
 
-                // Guardarlo para rotarlo
-                window.eggdog = eggdog;
-            },
-
-            undefined,
-
-            function (error) {
-                console.error('Error cargando Eggdog.obj:', error);
-            }
-        );
-    },
-
-    undefined,
-
-    function (error) {
-        console.error('Error cargando Eggdog.mtl:', error);
-    }
-);
+}, undefined, function(error) {
+    console.error('Error cargando Eggdog.mtl:', error);
+});
 
 // Animación
 function animate() {
@@ -139,13 +167,16 @@ function animate() {
 
 animate();
 
-// Ajustar al cambiar tamaño
+// Responsive
 window.addEventListener('resize', () => {
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
 });
 
 </script>
