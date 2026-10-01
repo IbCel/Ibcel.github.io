@@ -1,441 +1,155 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eggdog 3D</title>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Portafolio, diseño , Maquetación">
-    <META name="Keywords" content="Portafolio, diseño , Maquetación"/>
-    <meta name="Abdo Andres" content="Abdo andres">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <title>Abdo Andres Gonzalez Bohorquez</title>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #111;
+        }
 
-    <!-- Faviconss
-    ================================================== -->
-    <link rel="apple-touch-icon" sizes="57x57" href="images/icon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="images/icon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/icon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/icon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/icon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/icon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="images/icon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="images/icon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/icon/favicon-16x16.png">
-    <link rel="manifest" href="images/icon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="images/icon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <!-- / Favicons -->
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css"  href="css/stylemain.css">
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107450669-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments)};
-    gtag('js', new Date());
-
-    gtag('config', 'UA-107450669-1');
-    </script>
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Navigation -->
-<header id="headerPrin" class="headerBox bg-color-Yellow">
-    <section>
-    <div class="container">
-        <div class="row infoHeader text-center">
-            <div class="col-12 align-self-start text-right">
-                <div class="redes-top">
-                    <a class="btn-redes" target="_black" href="https://github.com/abdoandres"><i class="fa fa-github fa-lg"></i></a>  
-                    <a class="btn-redes"  target="_black" href="https://www.linkedin.com/in/abdo-andres-gonzalez-bohoquez-501a5a71/ "><i class="fa fa-linkedin-square fa-lg"></i></a>
-                </div>
-            </div>
-            <div class="col-12 align-self-center ">
-                <div class="contPrinAvatar">
-                    <div class="boxAvatar">
-                    <div class="avatarImg"><img class=" img-fluid" src="images/avatar.png" alt=""></div>
-                    </div>
-                   
-                    <div class="avatarInfo">
-                        <p>Hola soy </p>
-                        <h1>Abdo Andres Gonzalez B.</h1>
-                        <h2><span><</span> Diseñador UI / UX <span>/></span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col12 align-self-end">
-                <div class="navHeader">
-                        <ul class="nav nav-pills navTop-pill mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-perfil-tab" data-toggle="pill" href="#pills-perfil" role="tab" aria-controls="pills-perfil" aria-expanded="true">Perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-portafolio-tab" data-toggle="pill" href="#pills-portafolio" role="tab" aria-controls="pills-portafolio" aria-expanded="true">Portafolio</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" id="pills-otros-tab" data-toggle="pill" href="#pills-otros" role="tab" aria-controls="pills-otros" aria-expanded="true">Otros</a>
-                        </li>-->
-                        
-                        </ul>
-                </div>
-            </div>
-       </div>
-   </div>
- </section>  
-</header>  
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+}
+</script>
 
+<script type="module">
 
-    <!-- Begin page content -->
-<div class="tab-content" id="pills-tabContent">
-    <section class="tab-pane fade show active" id="pills-perfil" role="tabpanel" aria-labelledby="pills-perfil-tab">
-        <div class="container">
-            <!--content-->
-            <div class="row pt--40">
-                <div class="col-lg-7">
-                    <div class="info--princ">
-                    <div class="logo-personal"> <img class=" img-fluid" src="images/logos/logo-personal.svg" alt=""></div>
-                    <p>
-                        Soy diseñador UX/UI, con más de 7 años de experiencia en páginas web,  productos digitales, 
-                        interfaces de usuario, social media y ambientes multimedia, creaciones a partir de UX, 
-                        interés en tendencias de Diseño Digital, 
-                        con aptitudes para dirección creativa y conceptualización gráfica.</p>
+import * as THREE from 'three';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 
-                        <p>Apasionado por la tecnología y las nuevas tendencias de diseño, la experiencia me ha 
-                        permitido desarrollar habilidades para ser creativo, ordenado, amable y logro llegar fácilmente a 
-                        acuerdos  con el cliente interno y externo. 
-                    </p>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <h2 class="tituPrin">CONTÁCTO</h2>
-                    <ul class="ul-Info">
-                        <li><i class="fa fa-envelope-o"></i> abdoandres@gmail.com</li>
-                        <li><i class="fa fa-whatsapp" ></i> 311 6195431</li>
-                        <li><i class="fa fa-map-marker"></i> Medellín - Colombia</li>
-                        <li><i class="fa fa-skype"></i> abdoandres</li>
-                        
-                    </ul>
-                    <div class="box-download">
-                    <p>Conoceme más </p>
-                    <a class="btn btn-general" href="doc/Abdo-Andres-Gonzalez-hojadevida.pdf" target="_blank">Descargar hoja de vida</a>
-                    </div>
-                </div>
-            </div>
-            <!-- / content-->
-        </div>
-        <div class="container-fluid bg-study pt--40 mt--80 mb--80">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img class="img-fluid img-computer" src="images/computer.png" alt="">
-                    </div>
-                    <div class="col-lg-6">
-                         <div class="row">
-                            <div class="col-12"><h2 class="tituPrin">ESTUDIOS</h2> </div>
-                            <div class="col-12">
-                                <div class="infoStudy-U2 ">
-                                        <h2 class="card-title">Gráfica <strong> Digital </strong></h2>
-                                        <p class="card-text">Tecnólogo en Gráfica Digital </p>
-                                </div>
-                                <div class="infoStudy-U2 ">
-                                        <h2 class="card-title">Diseño <strong>Industrial</strong></h2>
-                                        <p class="card-text">Tecnólogo en Diseño Industrial</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+// Escena
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x111111);
 
-        <div class="container">
-                <div class="row ">
-                     <div class="col-lg-12 text-center">
-                        <h2 class="tituPrin">COMPETENCIAS</h2>
-                        <div class="row justify-content-md-center">
-                            <div class="col-lg-6 text-center mt-3 mb-5">
-                            <p  class="text-center">Alto Compromiso, emprendedor, actitud para trabajar en equipo, con disposición 
-                                constante al aprendizaje, capacidad para la adaptación al cambio, persistente en el logro de los objetivos, con facultades para facilitar 
-                                la comunicación con los diferentes niveles de la organización. </p>
-                            </div>
-                        </div>  
-                    </div>
-                    <div class="col-lg-6">
+// Cámara
+const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
 
-                     <section class="progressAb-box">
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex align-self-center mr-3 logo-her" src="images/logos/html5-logo.svg" alt="HTML5">
-                            <div class="media-body">
-                                    <h5 class="mt-0">HTML5</h5> 
-                                    <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 95%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">95%</div>
-                                    </div>
-                                    <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/boostrap_logo.svg" alt="Boostrap">
-                            <div class="media-body">
-                                <h5 class="mt-0">Boostrap </h5> 
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 95%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">95%</div>
-                                </div>
-                                <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/javascript-logo.svg" alt="Javascipt">
-                            <div class="media-body">
-                                <h5 class="mt-0">Javascipt</h5>
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 65%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                </div>
-                                 <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/php-logo.svg" alt="php">
-                            <div class="media-body">
-                                <h5 class="mt-0">Php</h5>
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 60%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60%</div>
-                                </div>
-                                 <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/wordpress_logo.svg" alt="php">
-                            <div class="media-body">
-                                <h5 class="mt-0">WordPress</h5>
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 60%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">60%</div>
-                                </div>
-                                 <p></p>
-                            </div>
-                        </div>
-                        </section>
-                    </div>
-                    <div class="col-lg-6">
-                        <section class="progressAb-box">
-                         <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/css3-logo.svg" alt="CSS3">
-                            <div class="media-body">
-                                 <h5 class="mt-0">CSS3</h5> 
-                                 <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 95%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">95%</div>
-                                </div>
-                                <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/sass-logo.svg" alt="Sass">
-                            <div class="media-body">
-                                <h5 class="mt-0">Sass</h5> 
-                               <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 80%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">80%</div>
-                                </div>
-                               <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex mr-3 align-self-center mr-3 logo-her" src="images/logos/angular-logo.svg" alt="Angular 4">
-                            <div class="media-body">
-                                <h5 class="mt-0">Angular 4</h5>
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 40%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">40%</div>
-                                </div>
-                                 <p></p>
-                            </div>
-                        </div>
-                        <div class="media habi-box mb-4">
-                            <img class="d-flex align-self-center mr-3 logo-her" src="images/logos/github-logo.svg" alt="Git & Github">
-                            <div class="media-body">
-                                <h5 class="mt-0">Git & Github</h5>
-                                <div class="progress">
-                                  <div class="progress-bar bg-info" role="progressbar" style="width: 85%; height: 20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">85%</div>
-                                </div>
-                                  <p></p>
-                            </div>
-                        </div>
-                      </section>
+camera.position.set(0, 1, 4);
 
-                    </div>
-                </div>
-            </div>
-<div  class="container-fluid bg-courses pt--60 pb--60 mt--80 mb--80">
-        <div class="container">
-                <!--cursos-->
-                <div class="row">
-                    <div class="col-12"><h2 class="tituPrin--C-Yellow">CURSOS</h2> </div>
-                     <div class="col-sm-6">
-                         <div class="box-courses">
-                             <h2>Diseño</h2>
-                             <p>
-                                <span> Fundamentos de Diseño</span>,   
-                                <span>Curso de Diseño de Interfaces y UX</span>, 
-                                <span> Curso de Sketch</span>, 
-                                <span>Curso de Diseño Visual de Marcas</span>, 
-                                <span>Metodología Lean</span> 
-                             </p>
-                         </div>
-                         <div class="box-courses">
-                             <h2>Programación</h2>
-                             <p>
-                                <span>Curso profesional de Git y GitHub</span>,   
-                                <span>Desarrollo Web Online</span>, 
-                                <span>Curso de Responsive Design</span>, 
-                                <span>Curso de CSS Grid Layout</span>, 
-                                <span>Curso de Sass</span>, 
-                                <span>Animaciones para la Web</span>,
-                                <span>Fundamentos de JavaScript</span>, 
-                                <span>Lógica de programación</span>,
-                                <span>PHP</span>,
-                                <span>Curso de Temas y Plugins en WordPress</span>,
-                                <span>Fundamentos en boostrap 4</span>,
-                                <span>Curso de flexbox</span>
-                             </p>
-                         </div>
-                         <div class="box-courses">
-                             <h2>Marketing y Estrategia</h2>
-                             <p>
-                                <span>Introducción al Marketing Digital</span>,
-                                <span>Google Analytic</span>  
-                             </p>
-                         </div>
-                    </div>
-                     <div class="col-sm-6">
-                        
-                    </div>
-                </div>
-            </div>
-</div>
-                <!--/cursos-->
-        <div class="container">
-                 <!--cursos-->
-                <div class="row pb--60">
-                    <div class="col-12"><h2 class="tituPrin">HERRAMIENTAS</h2> </div>
-                    <div class="col-sm-6">
-                        <div class="box-her">
-                            <h3>Editores de diseño</h3>
-                            <!--<<p>Lorem ipsum dolor sit amet, consectetur adipisicing</p>-->
-                            <div  class="row">
-                                    <div class="col-sm-12 ">
-                                    <div class="ed-img">
-                                        <ul >
-                                            <li><img class="img-fluid" src="images/editores/adobe-graf.svg" alt=""></li>
-                                            <li><img class="img-fluid" src="images/editores/illustrator-graf.svg" alt=""></li>
-                                            <li><img class="img-fluid" src="images/editores/photoshop-graf.svg" alt=""></li>
-                                            <li><img class="img-fluid" src="images/editores/afterEffects-graf.svg" alt=""></li>
-                                            <li><img class="img-fluid" src="images/editores/adobe-xd.svg" alt=""></li>
-                                            <li><img class="img-fluid" src="images/editores/sketch-graf.svg" alt=""></li>
-                                            <li>Etc...</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="box-her">
-                            <h3>Editores de Programación</h3>
-                            <!--<p>Lorem ipsum dolor sit amet, consectetur adipi</p>-->
-                            <div  class="row">
-                            <div class="col-sm-12">
-                                <div class="ed-img">
-                                    <ul>
-                                    <li><img class="img-fluid" src="images/editores/visual_studio-code.svg" alt=""></li>
-                                    <li><img class="img-fluid" src="images/editores/sublime-text.svg" alt=""></li>
-                                    <li><img class="img-fluid" src="images/editores/dreamweaver.code.svg" alt=""></li>
-                                    <li>Etc...</li>
-                                </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!--/cursos-->
-                </div>
-            </section>
+// Renderizador
+const renderer = new THREE.WebGLRenderer({
+    antialias: true
+});
 
-            <section class="tab-pane fade" id="pills-portafolio" role="tabpanel" aria-labelledby="pills-portafolio-tab">
-                <div class="container">
-                <!--informacion-->
-                        <nav class="nav nav-tabs" id="myTab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-web-tab" data-toggle="tab" href="#nav-web" role="tab" aria-controls="nav-web" aria-expanded="true">Web / Movil  </a>
-                            <!--<a class="nav-item nav-link" id="nav-impresos-tab" data-toggle="tab" href="#nav-impresos" role="tab" aria-controls="nav-impresos">Impresos</a>-->
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-web" role="tabpanel" aria-labelledby="nav-web-tab">
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-                        <!--portafolio  -->
-                            <div class="row items-portafolio">
-    
-                            </div>
-                                <!--/portafolio  -->
-                                
-                            </div>
-                            <div class="tab-pane fade" id="nav-impresos" role="tabpanel" aria-labelledby="nav-impresos-tab">
-                                impresos
-                            </div>
-                        </div>
-                    <!-- /informacion-->   
-                </div>  
-            </section>
-            <section class="tab-pane fade" id="pills-otros" role="tabpanel" aria-labelledby="pills-otros-tab">
-                <div class="container"> 
-                   otros
-                </div>  
-            </section>
+document.body.appendChild(renderer.domElement);
 
-</div>
+// Luces
+const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+scene.add(ambientLight);
 
-    <footer id="footer">
-      <div class="container">
-          <div class="row text-center">
-            <div class="col-sm-12 pt-2 pb-2">
-                <div class="footer-block ">Abdo Andres González Bohórquez</div>
-                <div class="btns-redesFooter">
-                    <a target="_black" href="https://github.com/abdoandres"><i class="fa fa-github fa-lg"></i></a>  
-                    <a target="_black" href="https://www.linkedin.com/in/abdo-andres-gonzalez-bohoquez-501a5a71/ "><i class="fa fa-linkedin-square fa-lg"></i></a>
-                </div>
-            </div>
-          </div>
-     	</div>
-    </footer>
+const light = new THREE.DirectionalLight(0xffffff, 3);
+light.position.set(3, 5, 4);
+scene.add(light);
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/tether/tether.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/json-galery_portafolio.js"></script>
+// Cargar materiales
+const mtlLoader = new MTLLoader();
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-info" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Apostol</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="cont-movil"> <div class="info-device"><img class="card-img-top img-fluid" src="images/movil-img/movil-apostol.jpg" alt=""></div></div>
-      </div>
-    </div>
-  </div>
-</div>
+mtlLoader.load(
+    'Eggdog.mtl',
+
+    function (materials) {
+
+        materials.preload();
+
+        // Cargar modelo
+        const objLoader = new OBJLoader();
+        objLoader.setMaterials(materials);
+
+        objLoader.load(
+            'Eggdog.obj',
+
+            function (eggdog) {
+
+                // Centrar modelo
+                const box = new THREE.Box3().setFromObject(eggdog);
+                const center = box.getCenter(new THREE.Vector3());
+
+                eggdog.position.sub(center);
+
+                // Ajustar tamaño automáticamente
+                const size = box.getSize(new THREE.Vector3());
+                const maxSize = Math.max(size.x, size.y, size.z);
+
+                const scale = 2 / maxSize;
+                eggdog.scale.setScalar(scale);
+
+                scene.add(eggdog);
+
+                // Guardarlo para rotarlo
+                window.eggdog = eggdog;
+            },
+
+            undefined,
+
+            function (error) {
+                console.error('Error cargando Eggdog.obj:', error);
+            }
+        );
+    },
+
+    undefined,
+
+    function (error) {
+        console.error('Error cargando Eggdog.mtl:', error);
+    }
+);
+
+// Animación
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    if (window.eggdog) {
+        window.eggdog.rotation.y += 0.01;
+    }
+
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Ajustar al cambiar tamaño
+window.addEventListener('resize', () => {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+</script>
 
 </body>
-
 </html>
+```
